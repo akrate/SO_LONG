@@ -1,10 +1,12 @@
 NAME = so_long
 CC = cc
 FLAGS = -Wall -Wextra -Werror
+MFLAGS = -L/usr/include/minilibx-linux/ -lmlx_Linux -lXext -lX11
 RM = rm -rf
 
 SRC = cheking_map.c cheking_body.c ft_free.c main.c \
-read_arg.c get_next_line/get_next_line_utils.c  get_next_line/get_next_line.c
+read_arg.c get_next_line/get_next_line_utils.c  get_next_line/get_next_line.c \
+flood_fill.c 
 
 OBJ = $(SRC:.c=.o)
 
@@ -14,7 +16,7 @@ all: $(NAME)
 	$(CC) $(FLAGS) -c $< -o $@
 
 $(NAME): $(OBJ)
-	$(CC) $(OBJ) -o $(NAME)
+	$(CC) $(OBJ) $(MFLAGS) -o $(NAME)
 
 clean:
 	@$(RM) $(OBJ)

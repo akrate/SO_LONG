@@ -6,7 +6,7 @@
 /*   By: aoussama <aoussama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 20:11:05 by aoussama          #+#    #+#             */
-/*   Updated: 2025/03/02 16:47:14 by aoussama         ###   ########.fr       */
+/*   Updated: 2025/03/04 00:49:20 by aoussama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 # include <fcntl.h>
+# include "minilibx-linux/mlx.h"
+# include "minilibx-linux/mlx_int.h"
+
+typedef struct flood{
+    int x;
+    int y;
+}   t_pos;
+// typedef struct map
+// {
+//     void *mlx;
+// }
 // _________________get_next_line______________
 char	*get_next_line(int fd);
 int		ft_strchr(char *str);
@@ -30,9 +41,12 @@ int		ft_strlen(char *str);
 #endif
 // ______________________________________________
 char **read_arg(char *src);
-void cheking_body(char **str);
+int cheking_body(char **str);
 void ft_erorr(char **str);
 void cheking_map(char **str);
 void cheking_map(char **str);
+void flood_fill(char **map,t_pos size,t_pos start);
+int count_line(char **str);
+void ft_freee(char **str);
 
 #endif

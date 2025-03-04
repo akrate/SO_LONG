@@ -6,13 +6,13 @@
 /*   By: aoussama <aoussama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 16:41:51 by aoussama          #+#    #+#             */
-/*   Updated: 2025/03/02 16:42:14 by aoussama         ###   ########.fr       */
+/*   Updated: 2025/03/03 16:24:34 by aoussama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void cheking_body(char **str)
+int cheking_body(char **str)
 {
     int i;
     int j;
@@ -38,5 +38,5 @@ void cheking_body(char **str)
         write (1,"erorr\n",6);
         ft_erorr(str);
     }
-        
+        return (len);
 }

@@ -6,7 +6,7 @@
 /*   By: aoussama <aoussama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 01:16:33 by aoussama          #+#    #+#             */
-/*   Updated: 2025/03/03 17:16:32 by aoussama         ###   ########.fr       */
+/*   Updated: 2025/03/04 23:56:14 by aoussama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ void fill(char **map,t_pos size,int x,int y)
 {
     if (x < 0 || y < 0 || x >= size.x || y >= size.y)
         return;
-    if (map[x][y] == '1' || map[x][y] == 'S')
+    if (map[y][x] == '1' || map[y][x] == 'S')
         return ;
-    map[x][y] = 'S';
+    map[y][x] = 'S';
     fill(map,size,x +1,y);
     fill(map,size,x -1,y);
     fill(map,size,x,y +1);

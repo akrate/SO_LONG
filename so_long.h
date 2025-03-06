@@ -6,7 +6,7 @@
 /*   By: aoussama <aoussama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 20:11:05 by aoussama          #+#    #+#             */
-/*   Updated: 2025/03/04 00:49:20 by aoussama         ###   ########.fr       */
+/*   Updated: 2025/03/05 23:48:53 by aoussama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,8 @@ void cheking_map(char **str);
 void flood_fill(char **map,t_pos size,t_pos start);
 int count_line(char **str);
 void ft_freee(char **str);
-
+void use_wall(void *mlx,void *mnw,char **str);
+void use_background(void *mlx,void *mnw,char **str);
+void use_player(void *mlx,void *mnw,char **str);
+void use_coins(void *mlx,void *mnw,char **str);
 #endif

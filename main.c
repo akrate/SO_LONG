@@ -6,14 +6,14 @@
 /*   By: aoussama <aoussama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 20:17:07 by aoussama          #+#    #+#             */
-/*   Updated: 2025/03/04 00:50:11 by aoussama         ###   ########.fr       */
+/*   Updated: 2025/03/05 23:49:05 by aoussama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
 
-char **str_cpy(char **str,int y,int x)
+char **str_cpy(char **str,int x,int y)
 {
     char **result;
     
@@ -61,9 +61,16 @@ int chek_valid_map(char **str)
     return (0);
 }
 
+int button_x()
+{
+    exit(0);
+    return 1;
+}
+
 int main()
 {
     // int i = 0;
+    // int j;
     char **str;
     char **cpy;
     t_pos size;
@@ -72,10 +79,10 @@ int main()
     start.x = 1;
     start.y = 1;
     str = read_arg("test.txt");
-    size.y = cheking_body(str);
+    size.x = cheking_body(str);
     cheking_map(str);
-    size.x = count_line(str);
-    cpy = str_cpy(str,size.y,size.x);
+    size.y = count_line(str);
+    cpy = str_cpy(str,size.x,size.y);
     flood_fill(cpy,size,start);
     if (chek_valid_map(cpy) == 1)
     {
@@ -92,7 +99,14 @@ int main()
     void *mlx;
     void *mnw;
     mlx = mlx_init();
-    mnw = mlx_new_window(mlx,size.y * 32 , size.x * 32 ,"test");
+
+    
+    mnw = mlx_new_window(mlx,size.x * 32 , size.y * 32 ,"test");
+    use_wall(mlx,mnw,str);
+    use_background(mlx,mnw,str);
+    use_player(mlx,mnw,str);
+    use_coins(mlx,mnw,str);
+    mlx_hook(mnw, 17, 0, button_x, NULL);
     mlx_loop(mlx);
     ft_erorr(str);
 

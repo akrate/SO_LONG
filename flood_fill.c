@@ -6,7 +6,7 @@
 /*   By: aoussama <aoussama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 01:16:33 by aoussama          #+#    #+#             */
-/*   Updated: 2025/03/04 23:56:14 by aoussama         ###   ########.fr       */
+/*   Updated: 2025/03/23 23:44:46 by aoussama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void fill(char **map,t_pos size,int x,int y)
     fill(map,size,x,y +1);
     fill(map,size,x,y -1);
 }
-void flood_fill(char **map,t_pos size,t_pos start)
+void flood_fill(char **map,t_pos size,p_player start)
 {
     fill(map,size,start.x,start.y);
 }

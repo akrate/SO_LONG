@@ -6,7 +6,7 @@
 /*   By: aoussama <aoussama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 20:11:05 by aoussama          #+#    #+#             */
-/*   Updated: 2025/03/25 21:30:58 by aoussama         ###   ########.fr       */
+/*   Updated: 2025/03/26 02:11:38 by aoussama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,23 +25,28 @@
 # define D 100
 # define S 115
 # define ECS 65307
-typedef struct flood{
-    int x;
-    int y;
-}   t_pos;
+
 typedef struct player{
     int x;
     int y;
 } p_player;
+
+
+
 typedef struct s_data{
     void *mlx;
     void *mnw;
     char **str;
     int collectbles;
     int mv;
-    void *img;
     p_player door;
-    
+    p_player pos_player;
+    p_player size;
+    void *wall;
+    void *coin;
+    void *player;
+    void *exit;
+    void *back;
 }   t_data;
 
 // _________________get_next_line______________
@@ -61,7 +66,7 @@ int cheking_body(char **str);
 void ft_erorr(char **str);
 void cheking_map(char **str);
 void cheking_map(char **str);
-void flood_fill(char **map,t_pos size,p_player start);
+void flood_fill(char **map,p_player size,p_player start);
 int count_line(char **str);
 void ft_freee(char **str);
 // void use_wall(void *mlx,void *mnw,char **str);
@@ -77,6 +82,8 @@ int count_collectbles(char **str);
 int chek_collecteble(char c);
 int chek_exit(char c);
 p_player finde_door(char **map);
+void clean(t_data *game);
+void    free_images(t_data *game);
 // void use_door(void *mlx,void *mnw,char **str);
 
 #endif

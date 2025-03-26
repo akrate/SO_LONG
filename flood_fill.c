@@ -6,13 +6,13 @@
 /*   By: aoussama <aoussama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 01:16:33 by aoussama          #+#    #+#             */
-/*   Updated: 2025/03/23 23:44:46 by aoussama         ###   ########.fr       */
+/*   Updated: 2025/03/26 00:49:21 by aoussama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void fill(char **map,t_pos size,int x,int y)
+void fill(char **map,p_player size,int x,int y)
 {
     if (x < 0 || y < 0 || x >= size.x || y >= size.y)
         return;
@@ -24,7 +24,7 @@ void fill(char **map,t_pos size,int x,int y)
     fill(map,size,x,y +1);
     fill(map,size,x,y -1);
 }
-void flood_fill(char **map,t_pos size,p_player start)
+void flood_fill(char **map,p_player size,p_player start)
 {
     fill(map,size,start.x,start.y);
 }

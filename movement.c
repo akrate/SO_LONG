@@ -6,7 +6,7 @@
 /*   By: aoussama <aoussama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 19:46:41 by aoussama          #+#    #+#             */
-/*   Updated: 2025/03/25 21:29:42 by aoussama         ###   ########.fr       */
+/*   Updated: 2025/03/26 02:14:21 by aoussama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ void move_to_left(t_data *data)
     if (chek_collecteble(data->str[pos.y][pos.x - 1]) == 1)
     {
         data->collectbles = data->collectbles - 1; 
-        printf("collce = %d\n",data->collectbles);
     }
     if (chek_move(data->str[pos.y][pos.x - 1]) == 0)
     {
         if (chek_exit(data->str[pos.y][pos.x - 1]) == 1 && data->collectbles == 0)
         {
-            exit (1);
+            clean(data);
+            exit (0);
         }else
         {
             data->str[pos.y][pos.x] = '0';
@@ -45,7 +45,6 @@ void move_to_right(t_data *data)
     if (chek_collecteble(data->str[pos.y][pos.x + 1]) == 1)
     {
         data->collectbles = data->collectbles - 1; 
-        printf("collce = %d\n",data->collectbles);
     }
     if (chek_move(data->str[pos.y][pos.x + 1]) == 0)
     {
@@ -55,7 +54,8 @@ void move_to_right(t_data *data)
         }
         if (chek_exit(data->str[pos.y][pos.x + 1]) == 1 && data->collectbles == 0)
         {
-            exit (1);
+            clean(data);
+            exit (0);
         }else {
             
             data->str[pos.y][pos.x] = '0';
@@ -73,13 +73,13 @@ void move_tao_top(t_data *data)
     if (chek_collecteble(data->str[pos.y - 1][pos.x]) == 1)
     {
         data->collectbles = data->collectbles - 1; 
-        printf("collce = %d\n",data->collectbles);
     }
     if (chek_move(data->str[pos.y - 1][pos.x]) == 0)
     {
         if (chek_exit(data->str[pos.y - 1][pos.x]) == 1 && data->collectbles == 0)
         {
-            exit (1);
+            clean(data);
+            exit (0);
         }else
         {
             data->str[pos.y][pos.x] = '0';
@@ -97,21 +97,23 @@ void move_to_bottom(t_data *data)
     if (chek_collecteble(data->str[pos.y + 1][pos.x]) == 1)
     {
         data->collectbles = data->collectbles - 1; 
-        printf("collce = %d\n",data->collectbles);
     }
     if (chek_move(data->str[pos.y + 1][pos.x]) == 0)
     {
         if (chek_exit(data->str[pos.y + 1][pos.x]) == 1 && data->collectbles == 0)
         {
-            
-            exit (1);
+            clean(data);
+            exit (0);
         }else{
-            
-            
             data->str[pos.y][pos.x] = '0';
             data->str[pos.y + 1][pos.x] = 'P';
         }
     }
+}
+void ecs(t_data *game)
+{
+    clean(game);
+    exit (1);
 }
 int movement(int event,t_data *game)
 {
@@ -128,6 +130,9 @@ int movement(int event,t_data *game)
     }else if (event == D)
     {
         move_to_right(game);
+    }else if (event == ECS)
+    {
+        ecs(game);
     }
     if (game->str[game->door.y][game->door.x] != 'P' && game->str[game->door.y][game->door.x] != 'E' )
     {

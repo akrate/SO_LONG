@@ -6,7 +6,7 @@
 /*   By: aoussama <aoussama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 16:42:56 by aoussama          #+#    #+#             */
-/*   Updated: 2025/03/03 17:33:11 by aoussama         ###   ########.fr       */
+/*   Updated: 2025/03/26 01:59:00 by aoussama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,5 @@ void ft_freee(char **str)
         i++;
     }
     free(str);
+    str = NULL;
 }

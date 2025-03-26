@@ -6,17 +6,38 @@
 /*   By: aoussama <aoussama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 20:17:07 by aoussama          #+#    #+#             */
-/*   Updated: 2025/03/25 21:31:28 by aoussama         ###   ########.fr       */
+/*   Updated: 2025/03/26 02:08:09 by aoussama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
+void    free_images(t_data *game)
+{
+    if (!game->mlx || !game->mnw)
+        return ;
+    if (game->wall)
+        mlx_destroy_image(game->mlx, game->wall);
+    if (game->player)
+        mlx_destroy_image(game->mlx, game->player);
+    if (game->coin)
+        mlx_destroy_image(game->mlx, game->coin);
+    if (game->back)
+        mlx_destroy_image(game->mlx, game->back);
+    if (game->exit)
+        mlx_destroy_image(game->mlx, game->exit);
+}
 void clean(t_data *game)
 {
+    free_images(game);
     if(game->str)
         ft_freee(game->str);
-    // free_textures(game);
+    if (game->mlx && game->mnw)
+        mlx_destroy_window(game->mlx ,game->mnw);
+    if (game->mlx)
+    {
+        mlx_destroy_display(game->mlx);
+        free(game->mlx);
+    }
     
 }
 char **str_cpy(char **str,int x,int y)
@@ -63,8 +84,9 @@ int chek_valid_map(char **str)
     }
     return (0);
 }
-int button_x()
+int button_x(t_data *game)
 {
+    clean(game);
     exit(0);
 }
 
@@ -151,25 +173,38 @@ void init_game(t_data *game)
     game->str =   NULL;
     game->collectbles = 0;
     game->mv = 0;
+    game->back =  NULL;
+    game->coin =  NULL;
+    game->wall = NULL;
+    game->exit =  NULL;
+    game->player =  NULL;
+    game->door.x = 0;
+    game->door.y =  0;    
+}
+p_player get_size(t_data *game)
+{
+    p_player size;
+    
+    size.x = cheking_body(game->str);
+    size.y = count_line(game->str);
+
+    return (size);
 }
 int main(int ac,char **av)
 {
-    if (ac != 2)
-        return (1);
-    cheking_ber(av[1]);
     t_data game;
     char **cpy;
-    t_pos size;
-    p_player player_pos;
-
-    // init_game(&game);
+    
+    if (ac != 2)
+        return (1); 
+    cheking_ber(av[1]);
+    init_game(&game);
     game.str = read_arg(av[1]);
-    size.x = cheking_body(game.str);
     cheking_map(game.str);
-    size.y = count_line(game.str);
-    cpy = str_cpy(game.str,size.x,size.y);
-    player_pos = finde_player(cpy);
-    flood_fill(cpy,size,player_pos);
+    game.size = get_size(&game);
+    cpy = str_cpy(game.str,game.size.x,game.size.y);
+    game.pos_player = finde_player(cpy);
+    flood_fill(cpy,game.size,game.pos_player);
     if (chek_valid_map(cpy) == 1)
     {
         write (1,"error valid\n",11);
@@ -178,14 +213,22 @@ int main(int ac,char **av)
     }
     ft_freee(cpy);
     game.mlx = mlx_init();
-    game.mnw = mlx_new_window(game.mlx,size.x * 32 , size.y * 32 ,"test");
+    if (!game.mlx)
+    {
+        clean(&game);
+        exit(1);
+    }
+    game.mnw = mlx_new_window(game.mlx, game.size.x * 32 , game.size.y * 32 ,"test");
+    if (!game.mnw)
+    {
+        clean(&game);
+        exit(1);
+    }
     game.collectbles = count_collectbles(game.str);
     game.door = finde_door(game.str);
-    game.mv = 0;
     use_elmnets(&game);
-    mlx_hook(game.mnw, 17, 0, button_x, NULL);
     mlx_key_hook(game.mnw, movement, &game);
+    mlx_hook(game.mnw, 17, 0, button_x, &game);
     mlx_loop(game.mlx);
-    ft_erorr(game.str);
-
+    // clean(&game);
 }

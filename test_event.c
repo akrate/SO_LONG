@@ -1,14 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   test_event.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aoussama <aoussama@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/27 02:33:53 by aoussama          #+#    #+#             */
+/*   Updated: 2025/03/27 02:33:54 by aoussama         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
-
-typedef struct	s_vars {
+typedef struct s_vars
+{
 	void	*mlx;
 	void	*win;
-}				t_vars;
+}			t_vars;
 
 int	key_hook(int keycode)
 {
-	printf("%d\n",keycode);
+	printf("%d\n", keycode);
 	return (0);
 }
 

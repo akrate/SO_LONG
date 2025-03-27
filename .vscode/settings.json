@@ -5,6 +5,11 @@
         "format": "c",
         "so_long.h": "c",
         "stdio.h": "c",
-        "sstream": "c"
+        "sstream": "c",
+        "array": "c",
+        "deque": "c",
+        "vector": "c",
+        "string_view": "c",
+        "span": "c"
     }
 }

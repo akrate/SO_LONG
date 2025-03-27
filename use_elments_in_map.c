@@ -6,124 +6,68 @@
 /*   By: aoussama <aoussama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 21:03:06 by aoussama          #+#    #+#             */
-/*   Updated: 2025/03/26 02:11:55 by aoussama         ###   ########.fr       */
+/*   Updated: 2025/03/27 03:05:14 by aoussama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void use_door(t_data *game)
+static void	use_img(t_data *game, int *w, int *h)
 {
-    int i;
-    int j;
-    int w = 0,h = 0;
-    i = 0;
-        game->exit = mlx_xpm_file_to_image(game->mlx,"textures/wall.xpm",&w,&h);
-        while (game->str[i])
-        {
-            j = 0;
-            while (game->str[i][j])
-            {
-                if (game->str[i][j] == 'E')
-                {
-                    mlx_put_image_to_window(game->mlx,game->mnw,game->exit,j * 32,i * 32);
-                }
-                j++;
-            }
-            i++;
-        }
-}
-void use_wall(t_data *game)
-{
-    int i;
-    int j;
-    int w = 0,h = 0;
-    i = 0;
-    game->wall = mlx_xpm_file_to_image(game->mlx,"textures/wall.xpm",&w,&h);
-        while (game->str[i])
-        {
-            j = 0;
-            while (game->str[i][j])
-            {
-                if (game->str[i][j] == '1')
-                {
-                    mlx_put_image_to_window(game->mlx,game->mnw,game->wall,j * 32,i * 32);
-                }
-                j++;
-            }
-            i++;
-        }
-}
-void use_background(t_data *game)
-{
-    int i;
-    int j;
-    int w = 0,h = 0;
-    i = 0;
-    game->back = mlx_xpm_file_to_image(game->mlx,"textures/water2.xpm",&w,&h);
-        while (game->str[i])
-        {
-            j = 0;
-            while (game->str[i][j])
-            {
-                if (game->str[i][j] == '0')
-                {
-                    mlx_put_image_to_window(game->mlx,game->mnw,game->back,j * 32,i * 32);
-                }
-                j++;
-            }
-            i++;
-        }
-}
-void use_player(t_data *game)
-{
-    int i;
-    int j;
-    int w = 0,h = 0;
-    i = 0;
-    game->player = mlx_xpm_file_to_image(game->mlx,"textures/player.xpm",&w,&h);
-        while (game->str[i])
-        {
-            j = 0;
-            while (game->str[i][j])
-            {
-                if (game->str[i][j] == 'P')
-                {
-                    mlx_put_image_to_window(game->mlx,game->mnw,game->player,j * w,i * h);
-                }
-                j++;
-            }
-            i++;
-        }
-}
-void use_coins(t_data *game)
-{
-    int i;
-    int j;
-    int w = 0,h = 0;
-    i = 0;
-    game->coin = mlx_xpm_file_to_image(game->mlx,"textures/fish2.xpm",&w,&h);
-        while (game->str[i])
-        {
-            j = 0;
-            while (game->str[i][j])
-            {
-                if (game->str[i][j] == 'C')
-                {
-                    mlx_put_image_to_window(game->mlx,game->mnw,game->coin,j * 32,i * 32);
-                }
-                j++;
-            }
-            i++;
-        }
-}
-void use_elmnets(t_data *game)
-{
-    free_images(game);
-    use_wall(game);
-    use_background(game);
-    use_player(game);
-    use_coins(game);
-    use_door(game);
+	game->img.wall = mlx_xpm_file_to_image(game->mlx, "textures/wall.xpm", w,
+			h);
+	game->img.back = mlx_xpm_file_to_image(game->mlx, "textures/water2.xpm", w,
+			h);
+	game->img.player = mlx_xpm_file_to_image(game->mlx, "textures/player.xpm",
+			w, h);
+	game->img.exit = mlx_xpm_file_to_image(game->mlx, "textures/wall.xpm", w,
+			h);
+	game->img.coin = mlx_xpm_file_to_image(game->mlx, "textures/fish2.xpm", w,
+			h);
+	if (!game->img.wall || !game->img.back || !game->img.player
+		|| !game->img.exit || !game->img.coin)
+	{
+		write(1, "Failed to load the image.\n", 27);
+		clean(game, 1);
+	}
 }
 
+static void	use_elment(t_data *game)
+{
+	int	i;
+	int	j;
+
+	int (w), h;
+	i = 0;
+	use_img(game, &w, &h);
+	while (game->str[i])
+	{
+		j = 0;
+		while (game->str[i][j])
+		{
+			if (game->str[i][j] == 'P')
+				mlx_put_image_to_window(game->mlx, game->mnw, game->img.player,
+					j * w, i * h);
+			if (game->str[i][j] == 'C')
+				mlx_put_image_to_window(game->mlx, game->mnw, game->img.coin, j
+					* w, i * h);
+			if (game->str[i][j] == '0')
+				mlx_put_image_to_window(game->mlx, game->mnw, game->img.back, j
+					* w, i * h);
+			if (game->str[i][j] == '1')
+				mlx_put_image_to_window(game->mlx, game->mnw, game->img.wall, j
+					* w, i * h);
+			if (game->str[i][j] == 'E')
+				mlx_put_image_to_window(game->mlx, game->mnw, game->img.exit, j
+					* w, i * h);
+			j++;
+		}
+		i++;
+	}
+}
+
+void	use_elmnets(t_data *game)
+{
+	free_images(game);
+	use_elment(game);
+}

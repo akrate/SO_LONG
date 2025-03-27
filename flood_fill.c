@@ -6,25 +6,83 @@
 /*   By: aoussama <aoussama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 01:16:33 by aoussama          #+#    #+#             */
-/*   Updated: 2025/03/26 00:49:21 by aoussama         ###   ########.fr       */
+/*   Updated: 2025/03/27 03:04:47 by aoussama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void fill(char **map,p_player size,int x,int y)
+char	**str_cpy(char **str, int x, int y)
 {
-    if (x < 0 || y < 0 || x >= size.x || y >= size.y)
-        return;
-    if (map[y][x] == '1' || map[y][x] == 'S')
-        return ;
-    map[y][x] = 'S';
-    fill(map,size,x +1,y);
-    fill(map,size,x -1,y);
-    fill(map,size,x,y +1);
-    fill(map,size,x,y -1);
+	char	**result;
+
+	int (j), i = 0;
+	result = malloc((y + 1) * sizeof(char *));
+	if (result == NULL)
+		return (NULL);
+	while (str[i])
+	{
+		j = 0;
+		result[i] = (char *)malloc((x + 1) * sizeof(char));
+		if (result[i] == NULL)
+			return (ft_freee(result), NULL);
+		while (j < x)
+		{
+			result[i][j] = str[i][j];
+			j++;
+		}
+		result[i][j] = '\0';
+		i++;
+	}
+	result[i] = NULL;
+	return (result);
 }
-void flood_fill(char **map,p_player size,p_player start)
+
+static int	chek_valid_map(char **str)
 {
-    fill(map,size,start.x,start.y);
+	int	i;
+	int	j;
+
+	i = 0;
+	while (str[i])
+	{
+		j = 0;
+		while (str[i][j] && str[i][j] != '\n')
+		{
+			if (str[i][j] != '1' && str[i][j] != '0' && str[i][j] != 'S')
+				return (1);
+			j++;
+		}
+		i++;
+	}
+	return (0);
+}
+
+static void	fill(char **map, t_player size, int x, int y)
+{
+	if (x < 0 || y < 0 || x >= size.x || y >= size.y)
+		return ;
+	if (map[y][x] == '1' || map[y][x] == 'S')
+		return ;
+	map[y][x] = 'S';
+	fill(map, size, x + 1, y);
+	fill(map, size, x - 1, y);
+	fill(map, size, x, y + 1);
+	fill(map, size, x, y - 1);
+}
+
+void	flood_fill(t_data *game)
+{
+	char	**cpy;
+
+	cpy = str_cpy(game->str, game->size.x, game->size.y);
+	game->pos_player = finde_player(cpy);
+	fill(cpy, game->size, game->pos_player.x, game->pos_player.y);
+	if (chek_valid_map(cpy) == 1)
+	{
+		write(2, "error\nplayer cannot access all elements:(\n", 43);
+		ft_freee(cpy);
+		ft_error(game->str);
+	}
+	ft_freee(cpy);
 }

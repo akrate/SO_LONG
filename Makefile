@@ -6,7 +6,7 @@ RM = rm -rf
 # SRC = test_event.c
 SRC = cheking_map.c cheking_body.c ft_free.c main.c \
 read_arg.c get_next_line/get_next_line_utils.c  get_next_line/get_next_line.c \
-flood_fill.c use_elments_in_map.c movement.c chek_move.c
+flood_fill.c use_elments_in_map.c movement.c chek_move.c moves.c count_and_find.c
 
 OBJ = $(SRC:.c=.o)
 

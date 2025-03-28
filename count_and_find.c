@@ -6,7 +6,7 @@
 /*   By: aoussama <aoussama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 02:10:47 by aoussama          #+#    #+#             */
-/*   Updated: 2025/03/27 03:07:07 by aoussama         ###   ########.fr       */
+/*   Updated: 2025/03/27 23:04:05 by aoussama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,9 @@ int	count_line(char **str)
 	{
 		if (str[i][0] == '\n')
 		{
-			write(1, "erorr\n", 6);
+			write(2, "error\nmap is not correct\n", 26);
 			ft_error(str);
+			exit (1);
 		}
 		i++;
 	}

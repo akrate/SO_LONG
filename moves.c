@@ -6,7 +6,7 @@
 /*   By: aoussama <aoussama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 02:05:01 by aoussama          #+#    #+#             */
-/*   Updated: 2025/03/27 03:06:25 by aoussama         ###   ########.fr       */
+/*   Updated: 2025/03/28 00:02:17 by aoussama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,15 @@ void	move_to_left(t_data *data)
 	{
 		if (chek_exit(data->str[pos.y][pos.x - 1]) == 1
 			&& data->collectbles == 0)
-			clean(data, 0);
+			clean(data, 2);
 		else
 		{
 			data->str[pos.y][pos.x] = '0';
 			data->str[pos.y][pos.x - 1] = 'P';
+			print(data->mv);
+			data->mv++;
 		}
 	}
-	print(data->mv);
 }
 
 void	move_to_right(t_data *data)
@@ -47,14 +48,15 @@ void	move_to_right(t_data *data)
 			data->str[data->door.y][data->door.x] = 'E';
 		if (chek_exit(data->str[pos.y][pos.x + 1]) == 1
 			&& data->collectbles == 0)
-			clean(data, 0);
+			clean(data, 2);
 		else
 		{
 			data->str[pos.y][pos.x] = '0';
 			data->str[pos.y][pos.x + 1] = 'P';
+			print(data->mv);
+			data->mv++;
 		}
 	}
-	print(data->mv);
 }
 
 void	move_tao_top(t_data *data)
@@ -68,14 +70,15 @@ void	move_tao_top(t_data *data)
 	{
 		if (chek_exit(data->str[pos.y - 1][pos.x]) == 1
 			&& data->collectbles == 0)
-			clean(data, 0);
+			clean(data, 2);
 		else
 		{
 			data->str[pos.y][pos.x] = '0';
 			data->str[pos.y - 1][pos.x] = 'P';
+			print(data->mv);
+			data->mv++;
 		}
 	}
-	print(data->mv);
 }
 
 void	move_to_bottom(t_data *data)
@@ -89,17 +92,18 @@ void	move_to_bottom(t_data *data)
 	{
 		if (chek_exit(data->str[pos.y + 1][pos.x]) == 1
 			&& data->collectbles == 0)
-			clean(data, 0);
+			clean(data, 2);
 		else
 		{
 			data->str[pos.y][pos.x] = '0';
 			data->str[pos.y + 1][pos.x] = 'P';
+			print(data->mv);
+			data->mv++;
 		}
 	}
-	print(data->mv);
 }
 
 void	ecs(t_data *game)
 {
-	clean(game, 1);
+	clean(game, 0);
 }

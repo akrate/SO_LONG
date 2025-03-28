@@ -6,7 +6,7 @@
 /*   By: aoussama <aoussama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 21:03:06 by aoussama          #+#    #+#             */
-/*   Updated: 2025/03/27 03:05:14 by aoussama         ###   ########.fr       */
+/*   Updated: 2025/03/28 02:06:24 by aoussama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@ static void	use_img(t_data *game, int *w, int *h)
 {
 	game->img.wall = mlx_xpm_file_to_image(game->mlx, "textures/wall.xpm", w,
 			h);
-	game->img.back = mlx_xpm_file_to_image(game->mlx, "textures/water2.xpm", w,
+	game->img.back = mlx_xpm_file_to_image(game->mlx, "textures/back.xpm", w,
 			h);
 	game->img.player = mlx_xpm_file_to_image(game->mlx, "textures/player.xpm",
 			w, h);
-	game->img.exit = mlx_xpm_file_to_image(game->mlx, "textures/wall.xpm", w,
+	game->img.exit = mlx_xpm_file_to_image(game->mlx, "textures/exit.xpm", w,
 			h);
-	game->img.coin = mlx_xpm_file_to_image(game->mlx, "textures/fish2.xpm", w,
+	game->img.coin = mlx_xpm_file_to_image(game->mlx, "textures/coin.xpm", w,
 			h);
 	if (!game->img.wall || !game->img.back || !game->img.player
 		|| !game->img.exit || !game->img.coin)
@@ -34,13 +34,9 @@ static void	use_img(t_data *game, int *w, int *h)
 
 static void	use_elment(t_data *game)
 {
-	int	i;
-	int	j;
-
-	int (w), h;
-	i = 0;
+	int (w), h, j, i = -1;
 	use_img(game, &w, &h);
-	while (game->str[i])
+	while (game->str[++i])
 	{
 		j = 0;
 		while (game->str[i][j])
@@ -62,7 +58,6 @@ static void	use_elment(t_data *game)
 					* w, i * h);
 			j++;
 		}
-		i++;
 	}
 }
 

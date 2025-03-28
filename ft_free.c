@@ -6,7 +6,7 @@
 /*   By: aoussama <aoussama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 16:42:56 by aoussama          #+#    #+#             */
-/*   Updated: 2025/03/27 03:01:26 by aoussama         ###   ########.fr       */
+/*   Updated: 2025/03/28 02:08:02 by aoussama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,12 @@ void	clean(t_data *game, int i)
 	if (i == 1)
 		exit(1);
 	else if (i == 0)
+	{
 		exit(0);
+	}
+	else if (i == 2)
+	{
+		write (1, "you win :)\n", 12);
+		exit(0);
+	}
 }

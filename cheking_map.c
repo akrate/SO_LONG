@@ -6,7 +6,7 @@
 /*   By: aoussama <aoussama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 16:44:38 by aoussama          #+#    #+#             */
-/*   Updated: 2025/03/27 03:04:07 by aoussama         ###   ########.fr       */
+/*   Updated: 2025/03/27 23:06:11 by aoussama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,21 +101,21 @@ void	cheking_map(char **str)
 	line = count_line(str);
 	if (cheking(str[0]) == 1 || cheking_last(str[line - 1]) == 1)
 	{
-		write(1, "error in map\n", 6);
+		write(1, "error\nmap is not correct\n", 26);
 		ft_error(str);
 	}
 	while (i < line - 1)
 	{
 		if (cheking_line(str[i]) == 1)
 		{
-			write(2, "element error\n", 14);
+			write(2, "error\nelement error\n", 21);
 			ft_error(str);
 		}
 		i++;
 	}
 	if (check_elements(str) == 1)
 	{
-		write(2, "element error\n", 14);
+		write(2, "error\nelement error\n", 21);
 		ft_error(str);
 	}
 }

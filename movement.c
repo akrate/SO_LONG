@@ -6,7 +6,7 @@
 /*   By: aoussama <aoussama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 19:46:41 by aoussama          #+#    #+#             */
-/*   Updated: 2025/03/27 02:49:59 by aoussama         ###   ########.fr       */
+/*   Updated: 2025/03/27 21:50:45 by aoussama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,5 @@ int	movement(int event, t_data *game)
 		&& game->str[game->door.y][game->door.x] != 'E')
 		game->str[game->door.y][game->door.x] = 'E';
 	use_elmnets(game);
-	game->mv++;
 	return (0);
 }

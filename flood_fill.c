@@ -6,7 +6,7 @@
 /*   By: aoussama <aoussama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 01:16:33 by aoussama          #+#    #+#             */
-/*   Updated: 2025/03/27 03:04:47 by aoussama         ###   ########.fr       */
+/*   Updated: 2025/03/27 21:45:52 by aoussama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,11 @@ void	flood_fill(t_data *game)
 	char	**cpy;
 
 	cpy = str_cpy(game->str, game->size.x, game->size.y);
+	if (cpy == NULL)
+	{
+		write(2, "error\nerror in malloc:(\n", 25);
+		ft_error(game->str);
+	}
 	game->pos_player = finde_player(cpy);
 	fill(cpy, game->size, game->pos_player.x, game->pos_player.y);
 	if (chek_valid_map(cpy) == 1)

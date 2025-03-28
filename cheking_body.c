@@ -6,7 +6,7 @@
 /*   By: aoussama <aoussama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 16:41:51 by aoussama          #+#    #+#             */
-/*   Updated: 2025/03/27 03:01:00 by aoussama         ###   ########.fr       */
+/*   Updated: 2025/03/28 02:07:45 by aoussama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,6 @@ int	cheking_body(char **str)
 			ft_error(str);
 		}
 		i++;
-	}
-	if (i >= len)
-	{
-		write(1, "erorr\nin map:(\n", 16);
-		ft_error(str);
 	}
 	return (len);
 }

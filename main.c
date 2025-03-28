@@ -6,7 +6,7 @@
 /*   By: aoussama <aoussama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 20:17:07 by aoussama          #+#    #+#             */
-/*   Updated: 2025/03/27 02:29:56 by aoussama         ###   ########.fr       */
+/*   Updated: 2025/03/28 00:01:40 by aoussama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	button_x(t_data *game)
 {
-	clean(game, 1);
+	clean(game, 0);
 	return (1);
 }
 
